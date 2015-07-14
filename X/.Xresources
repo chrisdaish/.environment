@@ -71,3 +71,4 @@
 
 !-- urxvt settings --!
 URxvt.scrollBar: false
+xvt.intensityStyles: false
