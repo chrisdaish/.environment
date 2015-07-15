@@ -1,0 +1,37 @@
+#!/bin/bash
+# Docker launch commands
+
+### Housekeeping
+
+docker-cleanup(){
+  docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+  docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
+
+del_stopped(){
+  local name=$1
+  local state=$(docker inspect --format "{{.State.Running}}" $name 2>/dev/null)
+
+  if [[ "$state" == "false" ]]; then
+    docker rm $name
+  fi
+}
+
+### Container launchers
+scudcloud(){
+  del_stopped scudcloud
+
+  docker run -d \
+    -e uid=$(id -u) \
+    -e gid=$(id -g) \
+    -e DISPLAY=unix$DISPLAY \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /etc/machine-id:/etc/machine-id:ro \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $HOME/.scudcloud:/home/scudcloud/.config/scudcloud \
+    --name scudcloud \
+    chrisdaish/scudcloud
+
+  # exit current shell
+  exit 0
+}
