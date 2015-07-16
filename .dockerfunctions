@@ -36,3 +36,25 @@ scudcloud(){
   # exit current shell
   exit 0
 }
+chrome(){
+  del_stopped chrome
+
+  docker run -d \
+    -e DISPLAY=unix$DISPLAY \
+    -e ARGS="'--proxy-pac-url=$http_proxy_pac'" \
+    -e uid=$(id -u) \
+    -e gid=$(id -g) \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v $HOME/Downloads:/home/google-chrome/Downloads:rw \
+    -v $HOME/.chrome:/home/google-chrome/.config/google-chrome \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /var/run/cups:/var/run/cups:ro \
+    -v /dev/snd:/dev/snd \
+    --name chrome \
+    --net host \
+    --privileged \
+    chrisdaish/google-chrome
+
+  # exit current shell
+  exit 0
+}
