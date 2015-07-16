@@ -25,6 +25,7 @@ scudcloud(){
     -e uid=$(id -u) \
     -e gid=$(id -g) \
     -e DISPLAY=unix$DISPLAY \
+    -e http_proxy=$http_proxy \
     -v /etc/localtime:/etc/localtime:ro \
     -v /etc/machine-id:/etc/machine-id:ro \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
