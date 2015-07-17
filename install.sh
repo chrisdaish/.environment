@@ -28,5 +28,6 @@ $LN -sf $HOME/.environment/vim/.vimrc $HOME/.vimrc
 
 # X
 $LN -sf $HOME/.environment/X/.Xresources $HOME/.Xresources
+$LN -sf $HOME/.environment/X/.Xprofile $HOME/.Xprofile
 $XRDB $HOME/.Xresources
 
