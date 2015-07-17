@@ -1,0 +1,9 @@
+[http]
+	proxy = $http_proxy
+	sslverify = false
+[user]
+	name = Chris Daish
+  email = chrisdaish@gmail.com
+
+[github]
+  user = chrisdaish
