@@ -58,3 +58,26 @@ chrome(){
   # exit current shell
   exit 0
 }
+
+firefox(){
+  del_stopped firefox
+
+  docker run -d \
+    -e DISPLAY=unix$DISPLAY \
+    -e uid=$(id -u) \
+    -e gid=$(id -g) \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v $HOME/Downloads:/home/firefox/Downloads:rw \
+    -v $HOME/.firefox:/home/firefox/.mozilla:rw \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /var/run/cups:/var/run/cups:ro \
+    -v /dev/snd:/dev/snd \
+    --name firefox \
+    --net host \
+    --privileged \
+    chrisdaish/firefox
+
+  # exit current shell
+  exit 0
+}
+
