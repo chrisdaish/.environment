@@ -70,5 +70,7 @@
 *color15:                 S_base3
 
 !-- urxvt settings --!
-URxvt.scrollBar: false
-xvt.intensityStyles: false
+URxvt.scrollBar:        false
+URxvt.intensityStyles:  false
+URxvt.transparent:      true
+URxvt.shading:          20
