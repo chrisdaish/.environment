@@ -70,6 +70,7 @@
 *color15:                 S_base3
 
 !-- urxvt settings --!
+URxvt*termName:         rxvt
 URxvt.scrollBar:        false
 URxvt.intensityStyles:  false
 URxvt.transparent:      true
