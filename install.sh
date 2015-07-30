@@ -9,6 +9,7 @@ XRDB=$(/usr/bin/which xrdb)
 $LN -sf $HOME/.environment/.bash_profile $HOME/.bashrc
 $LN -sf $HOME/.environment/.bash_profile $HOME/.bash_profile
 $LN -sf $HOME/.environment/.corp $HOME/.corp
+$LN -sf $HOME/.environment/.aliases $HOME/.aliases
 $LN -sf $HOME/.environment/.dockerfunctions $HOME/.dockerfunctions
 
 # git
