@@ -24,4 +24,4 @@ set shiftwidth=2
 set expandtab
 
 " Mouse config
-set mouse=a
+set mouse=""
