@@ -69,9 +69,35 @@
 *color14:                 S_base1
 *color15:                 S_base3
 
+*utf8:                  1
+*saveLines:             999999
+
+!-- Xft settings -- !
+Xft.dpi:        90 
+Xft.rgba:       rgb
+Xft.autohint:   0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting:    1
+Xft.antialias:  1
+
+! -- Fonts -- !
+!! *fontName:              Source Code Pro Medium:size=10,antialias=true
+!!URxvt.font:xft:Monospace:pixelSize=8,style=Regular
+!!URxvt.boldFont:xft:Monospace:style=Bold,pixelSize=8
+
+*faceSize:              10
+*bellIsUrgent:          true
+
 !-- urxvt settings --!
-URxvt*termName:         rxvt
-URxvt.scrollBar:        false
-URxvt.intensityStyles:  false
-URxvt.transparent:      true
-URxvt.shading:          20
+URxvt*scrollTtyOutput:    false
+URxvt*scrollWithBuffer:   true
+URxvt*scrollTtyKeypress:  true
+URxvt.secondaryScreen:    1
+URxvt.secondaryScroll:    0
+URxvt.secondaryWheel:     1
+URxvt*termName:           rxvt
+URxvt.scrollBar:          false
+URxvt.intensityStyles:    false
+URxvt.transparent:        true
+URxvt.shading:            20
