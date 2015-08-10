@@ -86,6 +86,7 @@ Xft.antialias:  1
 !!URxvt.font:xft:Monospace:pixelSize=10,style=Regular
 URxvt.font:xft:DejavuSansMono:pixelsize=10,style=Book
 !!URxvt.boldFont:xft:Monospace:style=Bold,pixelSize=8
+URxvt.boldfont:xft:DejavuSansMono:pixelsize=10,style=Bold
 URxvt.letterSpace: -2
 
 *faceSize:              10
