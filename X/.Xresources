@@ -77,14 +77,16 @@ Xft.dpi:        90
 Xft.rgba:       rgb
 Xft.autohint:   0
 Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
+Xft.hintstyle:  hintslight
 Xft.hinting:    1
 Xft.antialias:  1
 
 ! -- Fonts -- !
 !! *fontName:              Source Code Pro Medium:size=10,antialias=true
-!!URxvt.font:xft:Monospace:pixelSize=8,style=Regular
+!!URxvt.font:xft:Monospace:pixelSize=10,style=Regular
+URxvt.font:xft:DejavuSansMono:pixelsize=10,style=Book
 !!URxvt.boldFont:xft:Monospace:style=Bold,pixelSize=8
+URxvt.letterSpace: -2
 
 *faceSize:              10
 *bellIsUrgent:          true
