@@ -81,3 +81,14 @@ firefox(){
   exit 0
 }
 
+weather(){
+  del_stopped weather
+
+  docker run \
+    -e http_proxy=$http_proxy \
+    -v /etc/localtime:/etc/localtime:ro \
+    --name weather \
+    --net host \
+    jess/weather --units 'uk' --location 'PO15 7PA'
+}
+
