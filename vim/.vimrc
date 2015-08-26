@@ -13,6 +13,7 @@ endif
 
 " ColourScheme Options
 set background=dark
+set t_Co=16
 let g:solarized_termcolors=16
 " let g:solarized_termcolors=256
 let g:solarized_termtrans=1
@@ -22,6 +23,15 @@ colorscheme solarized
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+" StatusBar
+set laststatus=2
+set ruler
+set showcmd
+set incsearch
+
+" Line Numbers
+set number
 
 " Mouse config
 set mouse=""
