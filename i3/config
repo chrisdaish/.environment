@@ -115,14 +115,14 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # multi-monitor support
-bindsym $mod+m exec xrandr --output HDMI1 --off
-bindsym $mod+shift+m exec xrandr --output HDMI1 --auto --right-of LVDS1
+bindsym $mod+m exec xrandr --output HDMI2 --off
+bindsym $mod+shift+m exec xrandr --output HDMI2 --auto --right-of eDP1
 
 # move current workspace between monitors
 bindsym $mod+Control+Left move workspace to output left
 bindsym $mod+Control+Down move workspace to output down
 bindsym $mod+Control+Up move workspace to output up
-bindsym $mod+Control+Right move workspace to output right  
+bindsym $mod+Control+Right move workspace to output right
 
 # lock screen
 bindsym $mod+l exec $HOME/.environment/i3/i3lock.sh
