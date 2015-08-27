@@ -33,3 +33,6 @@ set number
 
 " Mouse config
 set mouse=""
+
+" Allow backspacing over everything in insert mode
+ set backspace=indent,eol,start
