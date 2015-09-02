@@ -1,9 +1,9 @@
 [http]
-	proxy = $http_proxy
-	sslverify = false
+  proxy = http://proxy.uk.specsavers.com:8080
+  sslverify = false
 [user]
-	name = Chris Daish
-  email = chrisdaish@gmail.com
+  name = Chris Daish
+  email = chris.daish@specsavers.com
 
 [github]
   user = chrisdaish
