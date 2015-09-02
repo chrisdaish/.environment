@@ -6,7 +6,7 @@ LN=$(/usr/bin/which ln)
 XRDB=$(/usr/bin/which xrdb)
 
 # bash
-$LN -sf $HOME/.environment/.bash_profile $HOME/.bashrc
+$LN -sf $HOME/.environment/.bashrc $HOME/.bashrc
 $LN -sf $HOME/.environment/.bash_profile $HOME/.bash_profile
 $LN -sf $HOME/.environment/.corp $HOME/.corp
 $LN -sf $HOME/.environment/.aliases $HOME/.aliases
@@ -31,4 +31,9 @@ $LN -sf $HOME/.environment/vim/.vimrc $HOME/.vimrc
 $LN -sf $HOME/.environment/X/.Xresources $HOME/.Xresources
 $LN -sf $HOME/.environment/X/.Xprofile $HOME/.Xprofile
 $XRDB $HOME/.Xresources
+
+# fonts
+if [[ ! -L "$HOME/.fonts" ]]; then
+  $LN -sf $HOME/.environment/fonts $HOME/.fonts
+fi
 
