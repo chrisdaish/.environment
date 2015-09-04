@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source '/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'
+
+docker info
