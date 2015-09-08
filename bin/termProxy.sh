@@ -37,4 +37,6 @@ if [[ `uname` = 'Darwin' ]]; then
     # Git
     git config --global --unset https.proxy
   fi
+else
+  source $HOME/.corp
 fi

@@ -9,8 +9,15 @@ XRDB=$(/usr/bin/which xrdb)
 $LN -sf $HOME/.environment/.bashrc $HOME/.bashrc
 $LN -sf $HOME/.environment/.bash_profile $HOME/.bash_profile
 $LN -sf $HOME/.environment/.corp $HOME/.corp
+$LN -sf $HOME/.environment/.proxy $HOME/.proxy
 $LN -sf $HOME/.environment/.aliases $HOME/.aliases
 $LN -sf $HOME/.environment/.dockerfunctions $HOME/.dockerfunctions
+
+# bin
+if [[ ! -d $HOME/bin ]]; then
+  mkdir $HOME/bin
+fi
+$LN -sf $HOME/.environment/bin/termProxy.sh $HOME/bin/termProxy.sh
 
 # git
 $LN -sf $HOME/.environment/.gitconfig $HOME/.gitconfig
@@ -36,4 +43,3 @@ $XRDB $HOME/.Xresources
 if [[ ! -L "$HOME/.fonts" ]]; then
   $LN -sf $HOME/.environment/fonts $HOME/.fonts
 fi
-
