@@ -170,5 +170,5 @@ bar {
 exec --no-startup-id nm-applet
 exec --no-startup-id xrdb $HOME/.Xresources
 exec --no-startup-id feh --bg-fill $HOME/Pictures/wallpaper
-exec --no-startup-id i3-msg 'workspace 1: firefox; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace 1: firefox; exec firefox'
 exec --no-startup-id i3-msg 'workspace 10: chrome; exec chrome'
