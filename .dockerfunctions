@@ -32,7 +32,7 @@ chrome(){
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /var/run/cups:/var/run/cups:ro \
     -v /dev/snd:/dev/snd \
-    -v /dev/shm:/dev/shm \
+    -v /etc/asound.conf:/etc/asound.conf:ro \
     --name chrome \
     --net host \
     --privileged \
