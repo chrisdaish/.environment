@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Proxy specific options
+source $HOME/bin/termProxy.sh
+export no_proxy=localhost,127.0.0.1,/var/run/docker.sock,192.168.99.100
