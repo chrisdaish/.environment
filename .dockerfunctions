@@ -18,6 +18,24 @@ del_stopped(){
 }
 
 ### Container launchers
+acroread(){
+  del_stopped acroread
+
+  docker run -d \
+    -e DISPLAY=unix$DISPLAY \
+    -e uid=$(id -u) \
+    -e gid=$(id -g) \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v $HOME/Downloads:/home/acroread/Downloads:rw \
+    -v $HOME/Documents:/home/acroread/Documents:rw \
+    -v $HOME/.acroread:/home/acroread/.adobe/Acrobat/9.0:rw \
+    -v $HOME/.docker-environment/cups/client.conf:/etc/cups/client.conf:ro \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /var/run/cups:/var/run/cups:ro \
+    --name acroread \
+    chrisdaish/acroread
+}
+
 chrome(){
   del_stopped chrome
 
@@ -32,7 +50,8 @@ chrome(){
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /var/run/cups:/var/run/cups:ro \
     -v /dev/snd:/dev/snd \
-    -v /etc/asound.conf:/etc/asound.conf:ro \
+    -v /dev/shm:/dev/shm \
+    -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
     --name chrome \
     --net host \
     --privileged \
@@ -55,6 +74,7 @@ firefox(){
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /var/run/cups:/var/run/cups:ro \
     -v /dev/snd:/dev/snd \
+    -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
     --name firefox \
     --net host \
     --privileged \
@@ -62,6 +82,26 @@ firefox(){
 
   # exit current shell
   exit 0
+}
+
+vlc(){
+  del_stopped vlc
+
+  docker run -d \
+    -e DISPLAY=unix$DISPLAY \
+    -e uid=$(id -u) \
+    -e gid=$(id -g) \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v $HOME/Downloads:/home/vlc/Downloads:rw \
+    -v $HOME/Documents:/home/vlc/Documents:rw \
+    -v $HOME/.vlc:/home/vlc/.config/vlc:rw \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /var/run/cups:/var/run/cups:ro \
+    -v /dev/snd:/dev/snd \
+    -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
+    --name vlc \
+    --privileged \
+    chrisdaish/vlc
 }
 
 weather(){

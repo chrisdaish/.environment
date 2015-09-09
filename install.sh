@@ -43,3 +43,8 @@ $XRDB $HOME/.Xresources
 if [[ ! -L "$HOME/.fonts" ]]; then
   $LN -sf $HOME/.environment/fonts $HOME/.fonts
 fi
+
+# Docker environment configuration
+if [[ ! -L "$HOME/.docker-environment" ]]; then
+  $LN -sf $HOME/.environment/docker-environment $HOME/.docker-environment
+fi
