@@ -6,11 +6,19 @@ LN=$(/usr/bin/which ln)
 XRDB=$(/usr/bin/which xrdb)
 
 # bash
+$LN -sf $HOME/.environment/.aliases $HOME/.aliases
 $LN -sf $HOME/.environment/.bashrc $HOME/.bashrc
 $LN -sf $HOME/.environment/.bash_profile $HOME/.bash_profile
 $LN -sf $HOME/.environment/.corp $HOME/.corp
-$LN -sf $HOME/.environment/.aliases $HOME/.aliases
 $LN -sf $HOME/.environment/.dockerfunctions $HOME/.dockerfunctions
+$LN -sf $HOME/.environment/.exports $HOME/.exports
+$LN -sf $HOME/.environment/.proxy $HOME/.proxy
+
+# bin
+if [[ ! -d $HOME/bin ]]; then
+  mkdir $HOME/bin
+fi
+$LN -sf $HOME/.environment/bin/termProxy.sh $HOME/bin/termProxy.sh
 
 # git
 $LN -sf $HOME/.environment/.gitconfig $HOME/.gitconfig
@@ -37,3 +45,15 @@ if [[ ! -L "$HOME/.fonts" ]]; then
   $LN -sf $HOME/.environment/fonts $HOME/.fonts
 fi
 
+# Docker environment configuration
+if [[ ! -L "$HOME/.docker-environment" ]]; then
+  $LN -sf $HOME/.environment/docker-environment $HOME/.docker-environment
+fi
+
+setup_sudo(){
+  # keep some enviornment variables
+  echo -e 'Defaults env_keep += "ftp_proxy http_proxy https_proxy no_proxy "' >> /etc/sudoers
+
+  # don't require a password
+  echo -e "chris.daish ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+}
