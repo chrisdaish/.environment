@@ -1,2 +1,9 @@
+# Private settings
+.corp
+
 # We dont want the vim network history
-vim/.netrwhist
+.netrwhist
+
+# VIM autosave
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
