@@ -1,0 +1,2 @@
+# We dont want the vim network history
+vim/.netrwhist
