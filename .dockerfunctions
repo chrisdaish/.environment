@@ -2,9 +2,11 @@
 # Docker launch commands
 
 ### Darwin Docker Launch
-if [[ `uname` = 'Darwin' ]]; then
-  source $HOME/bin/startDocker.sh
-fi
+#if [[ `uname` = 'Darwin' ]]; then
+#  eval "$(docker-machine env default)"
+#  open -a XQuartz
+#  socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
+#fi
 
 ### Housekeeping
 docker-cleanup(){
