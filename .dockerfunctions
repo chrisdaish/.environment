@@ -84,6 +84,23 @@ firefox(){
   exit 0
 }
 
+libreoffice(){
+  del_stopped libreoffice
+
+  docker run -d \
+    -e DISPLAY=unix$DISPLAY \
+    -e uid=$(id -u) \
+    -e gid=$(id -g) \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v $HOME/Downloads:/home/libreoffice/Downloads:rw \
+    -v $HOME/Documents:/home/libreoffice/Documents:rw \
+    -v $HOME/.libreoffice:/home/libreoffice/.config/libreoffice:rw \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /var/run/cups:/var/run/cups:ro \
+    --name libreoffice \
+    chrisdaish/libreoffice
+}
+
 vlc(){
   del_stopped vlc
 
@@ -114,4 +131,3 @@ weather(){
     --net host \
     jess/weather --units 'uk' --location 'PO15 7PA'
 }
-
