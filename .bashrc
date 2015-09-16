@@ -71,10 +71,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-for file in /etc/bash_completion.d/* ; do
-  source "$file"
-done
 
 if [[ -f $HOME/.bash_profile ]]; then
-    source $HOME/.bash_profile
+  source $HOME/.bash_profile
 fi
