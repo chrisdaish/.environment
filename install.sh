@@ -19,6 +19,7 @@ if [[ ! -d $HOME/bin ]]; then
   mkdir $HOME/bin
 fi
 $LN -sf $HOME/.environment/bin/termProxy.sh $HOME/bin/termProxy.sh
+$LN -sf $HOME/.environment/bin/startDocker.sh $HOME/bin/startDocker.sh
 
 # git
 $LN -sf $HOME/.environment/.gitconfig $HOME/.gitconfig

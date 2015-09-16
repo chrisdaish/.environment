@@ -10,7 +10,7 @@ if [[ `uname` = 'Darwin' ]]; then
   HTTP_PROXY_PORT=`networksetup -getwebproxy "$SERVICE_NAME" | awk {'print $2'} | awk 'FNR == 3 {print}' | cut -d' ' -f2`
   if [[ $HTTP_PROXY_HOSTNAME != '' ]]; then
     # Terminal
-    export http_proxy="${HTTP_PROXY_HOSTNAME}:${HTTP_PROXY_PORT}";
+    export http_proxy="http://${HTTP_PROXY_HOSTNAME}:${HTTP_PROXY_PORT}";
     export HTTP_PROXY=$http_proxy
     # Git
     git config --global http.proxy http://${HTTP_PROXY_HOSTNAME}:${HTTP_PROXY_PORT}
@@ -26,7 +26,7 @@ if [[ `uname` = 'Darwin' ]]; then
   HTTPS_PROXY_PORT=`networksetup -getsecurewebproxy "$SERVICE_NAME" | awk {'print $2'} | awk 'FNR == 3 {print}' | cut -d' ' -f2`
   if [[ $HTTPS_PROXY_HOSTNAME != '' ]]; then
     # Terminal
-    export https_proxy="${HTTPS_PROXY_HOSTNAME}:${HTTPS_PROXY_PORT}";
+    export https_proxy="http://${HTTPS_PROXY_HOSTNAME}:${HTTPS_PROXY_PORT}";
     export HTTPS_PROXY=$https_proxy
     # Git
     git config --global https.proxy http://${HTTPS_PROXY_HOSTNAME}:${HTTPS_PROXY_PORT}
