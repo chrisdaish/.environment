@@ -8,6 +8,7 @@ if [[ `uname` = 'Darwin' ]]; then
   alias grep='ggrep --color=auto'
   alias fgrep='gfgrep --color=auto'
   alias egrep='gegrep --color=auto'
+  alias find='gfind'
 else
   if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
