@@ -6,49 +6,50 @@ LN=$(/usr/bin/which ln)
 XRDB=$(/usr/bin/which xrdb)
 
 # bash
-$LN -sf $HOME/.environment/.aliases $HOME/.aliases
-$LN -sf $HOME/.environment/.bashrc $HOME/.bashrc
-$LN -sf $HOME/.environment/.bash_profile $HOME/.bash_profile
-$LN -sf $HOME/.environment/.corp $HOME/.corp
-$LN -sf $HOME/.environment/.dockerfunctions $HOME/.dockerfunctions
-$LN -sf $HOME/.environment/.exports $HOME/.exports
-$LN -sf $HOME/.environment/.proxy $HOME/.proxy
+$LN -sf "$HOME"/.environment/.aliases "$HOME"/.aliases
+$LN -sf "$HOME"/.environment/.bashrc "$HOME"/.bashrc
+$LN -sf "$HOME"/.environment/.bash_profile "$HOME"/.bash_profile
+$LN -sf "$HOME"/.environment/.bash_prompt "$HOME"/.bash_prompt
+$LN -sf "$HOME"/.environment/.corp "$HOME"/.corp
+$LN -sf "$HOME"/.environment/.dockerfunctions "$HOME"/.dockerfunctions
+$LN -sf "$HOME"/.environment/.exports "$HOME"/.exports
+$LN -sf "$HOME"/.environment/.proxy "$HOME"/.proxy
 
 # bin
-if [[ ! -d $HOME/bin ]]; then
-  mkdir $HOME/bin
+if [[ ! -d "$HOME/bin" ]]; then
+  mkdir "$HOME"/bin
 fi
-$LN -sf $HOME/.environment/bin/termProxy.sh $HOME/bin/termProxy.sh
-$LN -sf $HOME/.environment/bin/startDocker.sh $HOME/bin/startDocker.sh
+$LN -sf "$HOME"/.environment/bin/termProxy.sh "$HOME"/bin/termProxy.sh
+$LN -sf "$HOME"/.environment/bin/startDocker.sh "$HOME"/bin/startDocker.sh
 
 # git
-$LN -sf $HOME/.environment/.gitconfig $HOME/.gitconfig
+$LN -sf "$HOME"/.environment/.gitconfig "$HOME"/.gitconfig
 
 # i3
 if [[ ! -L "$HOME/.i3" ]]; then
-  $LN -sf $HOME/.environment/i3 $HOME/.i3
+  $LN -sf "$HOME"/.environment/i3 "$HOME"/.i3
 fi
-$LN -sf $HOME/.environment/i3/i3status.conf $HOME/.i3status.conf
+$LN -sf "$HOME"/.environment/i3/i3status.conf "$HOME"/.i3status.conf
 
 # vim
 if [[ ! -L "$HOME/.vim" ]]; then
-  $LN -sf $HOME/.environment/vim $HOME/.vim
+  $LN -sf "$HOME"/.environment/vim "$HOME"/.vim
 fi
-$LN -sf $HOME/.environment/vim/.vimrc $HOME/.vimrc
+$LN -sf "$HOME"/.environment/vim/.vimrc "$HOME"/.vimrc
 
 # X
-$LN -sf $HOME/.environment/X/.Xresources $HOME/.Xresources
-$LN -sf $HOME/.environment/X/.Xprofile $HOME/.Xprofile
-$XRDB $HOME/.Xresources
+$LN -sf "$HOME"/.environment/X/.Xresources "$HOME"/.Xresources
+$LN -sf "$HOME"/.environment/X/.Xprofile "$HOME"/.Xprofile
+$XRDB "$HOME"/.Xresources
 
 # fonts
 if [[ ! -L "$HOME/.fonts" ]]; then
-  $LN -sf $HOME/.environment/fonts $HOME/.fonts
+  $LN -sf "$HOME"/.environment/fonts "$HOME"/.fonts
 fi
 
 # Docker environment configuration
 if [[ ! -L "$HOME/.docker-environment" ]]; then
-  $LN -sf $HOME/.environment/docker-environment $HOME/.docker-environment
+  $LN -sf "$HOME"/.environment/docker-environment "$HOME"/.docker-environment
 fi
 
 setup_sudo(){
