@@ -1,8 +1,10 @@
 #! /bin/bash
 
 if [[ `uname` = 'Darwin' ]]; then
+  # brew stuffs
   export PATH="/usr/local/bin:$PATH"
   source "`brew --prefix grc`/etc/grc.bashrc"
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
 for file in ~/.{bash_prompt,aliases,functions,path,extra,exports,proxy,dockerfunctions}; do
