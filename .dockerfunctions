@@ -4,8 +4,8 @@
 ### Darwin Docker Launch
 if [[ `uname` = 'Darwin' ]]; then
   eval "$(docker-machine env default)"
-  #open -a XQuartz
-  #socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
+  open -a XQuartz
+  pgrep socat > /dev/null || socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
 fi
 
 ### Housekeeping
@@ -70,22 +70,35 @@ chrome(){
 firefox(){
   del_stopped firefox
 
-  docker run -d \
-    -e DISPLAY=unix$DISPLAY \
-    -e uid=$(id -u) \
-    -e gid=$(id -g) \
-    -v /etc/localtime:/etc/localtime:ro \
-    -v $HOME/Downloads:/home/firefox/Downloads:rw \
-    -v $HOME/.firefox:/home/firefox/.mozilla:rw \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v /var/run/cups:/var/run/cups:ro \
-    -v /dev/snd:/dev/snd \
-    -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
-    --name firefox \
-    --net host \
-    --privileged \
-    chrisdaish/firefox
-
+  if [[ `uname` = 'Darwin' ]]; then
+    docker run -d \
+      -e DISPLAY=192.168.99.1:0 \
+      -e uid=$(id -u) \
+      -e gid=$(id -g) \
+      -v $HOME/Downloads:/home/firefox/Downloads:rw \
+      -v $HOME/.firefox:/home/firefox/.mozilla:rw \
+      -v /dev/snd:/dev/snd \
+      -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
+      --name firefox \
+      --net host \
+      --privileged \
+      chrisdaish/firefox
+  else
+    docker run -d \
+      -e DISPLAY=unix$DISPLAY \
+      -e uid=$(id -u) \
+      -e gid=$(id -g) \
+      -v $HOME/Downloads:/home/firefox/Downloads:rw \
+      -v $HOME/.firefox:/home/firefox/.mozilla:rw \
+      -v /tmp/.X11-unix:/tmp/.X11-unix \
+      -v /var/run/cups:/var/run/cups:ro \
+      -v /dev/snd:/dev/snd \
+      -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
+      --name firefox \
+      --net host \
+      --privileged \
+      chrisdaish/firefox
+  fi
   # exit current shell
   exit 0
 }
@@ -132,7 +145,6 @@ weather(){
 
   docker run \
     -e http_proxy=$http_proxy \
-    -v /etc/localtime:/etc/localtime:ro \
     --name weather \
     --net host \
     jess/weather --units 'uk' --location 'PO15 7PA'
