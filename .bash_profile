@@ -7,7 +7,7 @@ if [[ `uname` = 'Darwin' ]]; then
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
-for file in ~/.{bash_prompt,aliases,functions,path,extra,exports,proxy,dockerfunctions}; do
+for file in ~/.{bash_prompt,aliases,functions,path,extra,exports,proxy,corp,dockerfunctions}; do
   [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file

@@ -4,7 +4,7 @@
 ### Darwin Docker Launch
 if [[ `uname` = 'Darwin' ]]; then
   eval "$(docker-machine env default)"
-  open -a XQuartz
+  pgrep X11 > /dev/null || open -a XQuartz
   pgrep socat > /dev/null || socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
 fi
 
@@ -45,24 +45,38 @@ acroread(){
 chrome(){
   del_stopped chrome
 
-  docker run -d \
-    -e DISPLAY=unix$DISPLAY \
-    -e ARGS="'--proxy-pac-url=$http_proxy_pac'" \
-    -e uid=$(id -u) \
-    -e gid=$(id -g) \
-    -v /etc/localtime:/etc/localtime:ro \
-    -v $HOME/Downloads:/home/google-chrome/Downloads:rw \
-    -v $HOME/.chrome:/home/google-chrome/.config/google-chrome \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v /var/run/cups:/var/run/cups:ro \
-    -v /dev/snd:/dev/snd \
-    -v /dev/shm:/dev/shm \
-    -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
-    --name chrome \
-    --net host \
-    --privileged \
-    chrisdaish/google-chrome
-
+  if [[ `uname` = 'Darwin' ]]; then
+    docker run -d \
+      -e DISPLAY=192.168.99.1:0 \
+      -e ARGS="'--proxy-pac-url=$http_proxy_pac'" \
+      -e uid=$(id -u) \
+      -e gid=$(id -g) \
+      -v $HOME/Downloads:/home/google-chrome/Downloads:rw \
+      -v /dev/snd:/dev/snd \
+      -v /dev/shm:/dev/shm \
+      -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
+      --name chrome \
+      --net host \
+      --privileged \
+      chrisdaish/google-chrome
+  else
+    docker run -d \
+      -e DISPLAY=unix$DISPLAY \
+      -e ARGS="'--proxy-pac-url=$http_proxy_pac'" \
+      -e uid=$(id -u) \
+      -e gid=$(id -g) \
+      -v /etc/localtime:/etc/localtime:ro \
+      -v $HOME/Downloads:/home/google-chrome/Downloads:rw \
+      -v $HOME/.chrome:/home/google-chrome/.config/google-chrome:rw \
+      -v /tmp/.X11-unix:/tmp/.X11-unix \
+      -v /dev/snd:/dev/snd \
+      -v /dev/shm:/dev/shm \
+      -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
+      --name chrome \
+      --net host \
+      --privileged \
+      chrisdaish/google-chrome
+  fi
   # exit current shell
   exit 0
 }
