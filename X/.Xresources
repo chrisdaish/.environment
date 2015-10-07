@@ -82,13 +82,16 @@ Xft.hinting:    1
 Xft.antialias:  1
 
 ! -- Fonts -- !
+! Powerline fonts for vim-airline: https://github.com/powerline/fonts !
 !! *fontName:              Source Code Pro Medium:size=10,antialias=true
 !!URxvt.font:xft:Monospace:pixelSize=10,style=Regular
-URxvt.font:xft:DejavuSansMono:pixelsize=10,style=Book
-!!URxvt.font:xft:Hack:pixelSize=10,style=Regular
+!!URxvt.font:xft:DejavuSansMono:pixelsize=10,style=Book
+URxvt.font:xft:Dejavu\ Sans\ Mono\ for\ Powerline:pixelsize=10,style=Book
+!!URxvt.font:xft:Hack:pixelsize=10,style=Regular
 !!URxvt.boldFont:xft:Monospace:style=Bold,pixelSize=8
-URxvt.boldfont:xft:DejavuSansMono:pixelsize=10,style=Bold
-!!URxvt.boldFont:xft:Hack:pixelSize=10,style=Bold
+!!URxvt.boldfont:xft:DejavuSansMono:pixelsize=10,style=Bold
+URxvt.boldfont:xft:Dejavu\ Sans\ Mono\ for\ Powerline:pixelsize=10,style=Bold
+!!URxvt.boldFont:xft:Hack:pixelSize=10,style=Bold:antialias=true
 
 URxvt.letterSpace: -2
 
