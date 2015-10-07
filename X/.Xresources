@@ -73,7 +73,7 @@
 *saveLines:             999999
 
 !-- Xft settings -- !
-Xft.dpi:        90 
+Xft.dpi:        90
 Xft.rgba:       rgb
 Xft.autohint:   0
 Xft.lcdfilter:  lcddefault
@@ -82,15 +82,12 @@ Xft.hinting:    1
 Xft.antialias:  1
 
 ! -- Fonts -- !
-! Powerline fonts for vim-airline: https://github.com/powerline/fonts !
-!! *fontName:              Source Code Pro Medium:size=10,antialias=true
-!!URxvt.font:xft:Monospace:pixelSize=10,style=Regular
-!!URxvt.font:xft:DejavuSansMono:pixelsize=10,style=Book
+! Powerline glyphs for Dejavu Sans Mono: https://github.com/powerline/fonts !
 !!URxvt.font:xft:Dejavu\ Sans\ Mono\ for\ Powerline:pixelsize=10:style=Book:antialias=true
-URxvt.font:xft:Hack:pixelsize=10:style=Regular:antialias=true
-!!URxvt.boldFont:xft:Monospace:style=Bold,pixelSize=8
-!!URxvt.boldfont:xft:DejavuSansMono:pixelsize=10,style=Bold
 !!URxvt.boldfont:xft:Dejavu\ Sans\ Mono\ for\ Powerline:pixelsize=10:style=Bold
+
+! Hack (includes glyphs): https://github.com/chrissimpkins/Hack !
+URxvt.font:xft:Hack:pixelsize=10:style=Regular:antialias=true
 URxvt.boldFont:xft:Hack:pixelSize=10:style=Bold:antialias=true
 
 URxvt.letterSpace: -2
