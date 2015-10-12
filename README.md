@@ -1,13 +1,21 @@
 # .environment
 
+## Working with Git Submodules
+
 To clone including submodules:
 
 ```
+$ git clone --recursive https://github.com/chrisdaish/.environment.git
+```
+
+Already have the repo?
+
+```
 $ git submodule update --init --recursive
 ```
 
-For already cloned repos, or older Git versions, just use:
+To update submodules for commiting back to this repository.
 
 ```
-$ git submodule update --init --recursive
+$ git submodule update --remote --merge
 ```
