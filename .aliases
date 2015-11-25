@@ -9,6 +9,10 @@ if [[ `uname` = 'Darwin' ]]; then
   alias fgrep='gfgrep --color=auto'
   alias egrep='gegrep --color=auto'
   alias find='gfind'
+  alias xargs='gxargs'
+  alias locate='glocate'
+  alias updatedb='gupdatedb'
+  alias sed='gsed'
   # Lets give nvim a go for a bit...
   alias vim='nvim'
 else
