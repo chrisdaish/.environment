@@ -4,8 +4,8 @@
 ### Darwin Docker Launch
 if [[ `uname` = 'Darwin' ]]; then
   eval "$(docker-machine env default)"
-  pgrep X11 > /dev/null || open -a XQuartz
-  pgrep socat > /dev/null || socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
+#  pgrep X11 > /dev/null || open -a XQuartz
+#  pgrep socat > /dev/null || socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
 fi
 
 ### Housekeeping
@@ -175,4 +175,14 @@ weather(){
     --name weather \
     --net host \
     jess/weather --units 'uk' --location 'PO15 7PA'
+}
+
+dockercraft(){
+  del_stopped dockercraft
+
+  docker run -t -i -d -p 25565:25565 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /usr/local/bin/docker:/usr/local/bin/docker \
+    --name dockercraft \
+    gaetan/dockercraft
 }
