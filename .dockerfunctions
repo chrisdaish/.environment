@@ -81,6 +81,19 @@ chrome(){
   exit 0
 }
 
+dominion(){
+  del_stopped dominion
+
+  docker run -d \
+    -e DISPLAY=unix$DISPLAY \
+    -e uid=$(id -u) \
+    -e gid=$(id -g) \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    --name dominion \
+    chrisdaish/dominion
+}
+
 firefox(){
   del_stopped firefox
 
