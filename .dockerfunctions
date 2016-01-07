@@ -81,6 +81,16 @@ chrome(){
   exit 0
 }
 
+dockercraft(){
+  del_stopped dockercraft
+
+  docker run -t -i -d -p 25565:25565 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /usr/local/bin/docker:/usr/local/bin/docker \
+    --name dockercraft \
+    gaetan/dockercraft
+}
+
 dominion(){
   del_stopped dominion
 
@@ -175,14 +185,4 @@ weather(){
     --name weather \
     --net host \
     jess/weather --units 'uk' --location 'PO15 7PA'
-}
-
-dockercraft(){
-  del_stopped dockercraft
-
-  docker run -t -i -d -p 25565:25565 \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /usr/local/bin/docker:/usr/local/bin/docker \
-    --name dockercraft \
-    gaetan/dockercraft
 }
