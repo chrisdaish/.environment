@@ -7,3 +7,6 @@
 # VIM autosave
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
+
+# neovim symlink
+vim/init.vim
