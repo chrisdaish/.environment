@@ -48,6 +48,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_puppet_puppetlint_args='--no-80chars-check'
+let g:syntastic_puppet_puppetlint_args='--class_inherits_from_params_class'
 
 " Airline
 let g:airline_powerline_fonts = 1
