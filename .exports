@@ -21,8 +21,8 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER="less -X";
 
 # Standardise the GIT directory
-export GIT="${HOME}/git"
-export GIT_HOME="${HOME}/git"
+#export GIT="${HOME}/git"
+#export GIT_HOME="${HOME}/git"
 
 # hidpi for gtk apps
 #export GDK_SCALE=2
