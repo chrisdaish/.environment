@@ -8,7 +8,7 @@ if [[ `uname` = 'Darwin' ]]; then
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
-for file in ~/.{bash_prompt,aliases,functions,path,extra,exports,proxy,corp,dockerfunctions}; do
+for file in ~/.{aliases,functions,path,extra,exports,proxy,corp,dockerfunctions}; do
   [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file
@@ -56,4 +56,26 @@ if [[ `uname` = 'Darwin' ]]; then
   echo ''
 else
   xset r rate 200 20
+fi
+
+if [[ -f $HOME/.bash_prompt ]]; then
+  # Solarized dark colour theme.
+  if [[ $(tput colors) -ge 256 ]] 2>/dev/null; then
+    PROMPT_USER_COLOR="$(tput bold)$(tput setaf 37)" # BOLD CYAN
+    PROMPT_PREPOSITION_COLOR="$(tput bold)$(tput setaf 244)" # BOLD BASE0
+    PROMPT_DEVICE_COLOR="$(tput bold)$(tput setaf 37)" # BOLD CYAN
+    PROMPT_DIR_COLOR="$(tput bold)$(tput setaf 33)" # BOLD BLUE
+    PROMPT_GIT_STATUS_COLOR="$(tput bold)$(tput setaf 136)" # BOLD YELLOW
+    PROMPT_GIT_PROGRESS_COLOR="$(tput bold)$(tput setaf 136)" # BOLD YELLOW
+    PROMPT_SYMBOL_COLOR="$(tput bold)$(tput setaf 136)" # BOLD YELLOW
+  else
+    PROMPT_USER_COLOR="$(tput bold)$(tput setaf 6)" # BOLD CYAN
+    PROMPT_PREPOSITION_COLOR="$(tput bold)$(tput setaf 12)" # BOLD BASE0
+    PROMPT_DEVICE_COLOR="$(tput bold)$(tput setaf 6)" # BOLD CYAN
+    PROMPT_DIR_COLOR="$(tput bold)$(tput setaf 4)" # BOLD BLUE
+    PROMPT_GIT_STATUS_COLOR="$(tput bold)$(tput setaf 3)" # BOLD YELLOW
+    PROMPT_GIT_PROGRESS_COLOR="$(tput bold)$(tput setaf 3)" # BOLD YELLOW
+    PROMPT_SYMBOL_COLOR="$(tput bold)$(tput setaf 3)" # BOLD YELLOW
+  fi
+  source $HOME/.bash_prompt
 fi
