@@ -37,6 +37,21 @@ set mouse=""
 " Allow backspacing over everything in insert mode
  set backspace=indent,eol,start
 
+" Dont save .netrwhist history
+let g:netrw_dirhistmax=0
+ 
+" never do this again --> :set paste <ctrl-v> :set no paste
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -52,3 +67,6 @@ let g:syntastic_puppet_puppetlint_args='--no-documentation-check --no-80chars-ch
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+
+" Dockerfile settings
+autocmd FileType dockerfile set noexpandtab
