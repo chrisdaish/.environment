@@ -52,7 +52,7 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
-" Syntastic
+" -----{ Syntastic }-----
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -64,9 +64,22 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_puppet_puppetlint_args='--no-documentation-check --no-80chars-check --no-class_inherits_from_params_class-check'
 
-" Airline
+" -----{ Airline }-----
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
-" Dockerfile settings
+" -----{ Dockerfile }-----
 autocmd FileType dockerfile set noexpandtab
+
+" -----{ NERDTree }-----
+" For toggling
+nmap <C-n> :NERDTreeToggle<CR>
+noremap <Leader>n :NERDTreeToggle<cr>
+noremap <Leader>f :NERDTreeFind<cr>
+
+let NERDTreeShowHidden=1
+
+let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
+
+" Close nerdtree and vim on close file
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
