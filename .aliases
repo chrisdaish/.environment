@@ -15,7 +15,7 @@ if [[ $(uname) = 'Darwin' ]]; then
   alias updatedb='gupdatedb'
   alias sed='gsed'
   # Lets give nvim a go for a bit...
-  alias vim='nvim'
+  # alias vim='nvim'
 else
   if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
