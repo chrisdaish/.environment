@@ -64,15 +64,9 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_puppet_puppetlint_args='--no-documentation-check --no-80chars-check --no-class_inherits_from_params_class-check'
 
-" -----{ Dockerfile }-----
-autocmd FileType dockerfile set noexpandtab
-
 " -----{ Airline }-----
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-
-" -----{ Dockerfile }-----
-autocmd FileType dockerfile set noexpandtab
 
 " -----{ NERDTree }-----
 " For toggling
