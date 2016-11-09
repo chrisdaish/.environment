@@ -2,6 +2,7 @@
 
 # enable color support of ls and also add handy aliases
 if [[ $(uname) = 'Darwin' ]]; then
+  alias cat='gcat'
   alias cp='gcp'
   alias ls='gls --color=auto'
   alias dir='gdir --color=auto'
