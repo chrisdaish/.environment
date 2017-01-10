@@ -166,13 +166,13 @@ vlc(){
     -e uid=$(id -u) \
     -e gid=$(id -g) \
     -v /etc/localtime:/etc/localtime:ro \
-    -v $HOME/Downloads:/home/vlc/Downloads:rw \
-    -v $HOME/Documents:/home/vlc/Documents:rw \
-    -v $HOME/.vlc:/home/vlc/.config/vlc:rw \
+    -v "$HOME"/Downloads:/home/vlc/Downloads:rw \
+    -v "$HOME"/Documents:/home/vlc/Documents:rw \
+    -v "$HOME"/.vlc:/home/vlc/.config/vlc:rw \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /var/run/cups:/var/run/cups:ro \
     -v /dev/snd:/dev/snd \
-    -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
+    -v "$HOME"/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
     --name vlc \
     --privileged \
     chrisdaish/vlc
@@ -186,4 +186,14 @@ weather(){
     --name weather \
     --net host \
     jess/weather --units 'uk' --location 'PO15 7PA'
+}
+
+weeslack(){
+	del_stopped weeslack
+
+	docker run --rm -it \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v "${HOME}/.weechat:/home/user/.weechat" \
+		--name weeslack \
+		jess/wee-slack
 }
