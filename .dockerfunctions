@@ -2,7 +2,7 @@
 # Docker launch commands
 
 ### Darwin Docker Launch
-if [[ `uname` = 'Darwin' ]]; then
+if [[ $(uname) = 'Darwin' ]]; then
   eval "$(docker-machine env default)"
 #  pgrep X11 > /dev/null || open -a XQuartz
 #  pgrep socat > /dev/null || socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
@@ -10,17 +10,24 @@ fi
 
 ### Housekeeping
 docker-cleanup(){
-  docker rm $(docker ps -aq 2>/dev/null) 2>/dev/null
-  docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
-  docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+  local containers
+  containers=( $(docker ps -aq 2>/dev/null) )
+  docker rm "${containers[@]}" 2>/dev/null
+  local volumes
+  volumes=( $(docker ps --filter status=exited -q 2>/dev/null) )
+  docker rm -v "${volumes[@]}" 2>/dev/null
+  local images
+  images=( $(docker images --filter dangling=true -q 2>/dev/null) )
+  docker rmi "${images[@]}" 2>/dev/null
 }
 
 del_stopped(){
   local name=$1
-  local state=$(docker inspect --format "{{.State.Running}}" $name 2>/dev/null)
+  local state
+  state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
 
   if [[ "$state" == "false" ]]; then
-    docker rm $name
+    docker rm "$name"
   fi
 }
 
@@ -29,14 +36,14 @@ acroread(){
   del_stopped acroread
 
   docker run -d \
-    -e DISPLAY=unix$DISPLAY \
-    -e uid=$(id -u) \
-    -e gid=$(id -g) \
+    -e "DISPLAY=unix${DISPLAY}" \
+    -e uid="$(id -u)" \
+    -e gid="$(id -g)" \
     -v /etc/localtime:/etc/localtime:ro \
-    -v $HOME/Downloads:/home/acroread/Downloads:rw \
-    -v $HOME/Documents:/home/acroread/Documents:rw \
-    -v $HOME/.acroread:/home/acroread/.adobe/Acrobat/9.0:rw \
-    -v $HOME/.docker-environment/cups/client.conf:/etc/cups/client.conf:ro \
+    -v "${HOME}/Downloads:/home/acroread/Downloads:rw" \
+    -v "${HOME}/Documents:/home/acroread/Documents:rw" \
+    -v "${HOME}/.acroread:/home/acroread/.adobe/Acrobat/9.0:rw" \
+    -v "${HOME}/.docker-environment/cups/client.conf:/etc/cups/client.conf:ro" \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /var/run/cups:/var/run/cups:ro \
     --name acroread \
@@ -46,33 +53,33 @@ acroread(){
 chrome(){
   del_stopped chrome
 
-  if [[ `uname` = 'Darwin' ]]; then
+  if [[ $(uname) = 'Darwin' ]]; then
     docker run -d \
       -e DISPLAY=192.168.99.1:0 \
-      -e ARGS="'--proxy-pac-url=$http_proxy_pac'" \
-      -e uid=$(id -u) \
-      -e gid=$(id -g) \
-      -v $HOME/Downloads:/home/google-chrome/Downloads:rw \
+      -e ARGS="'--proxy-pac-url=${http_proxy_pac}'" \
+      -e uid="$(id -u)" \
+      -e gid="$(id -g)" \
+      -v "${HOME}/Downloads:/home/google-chrome/Downloads:rw" \
       -v /dev/snd:/dev/snd \
       -v /dev/shm:/dev/shm \
-      -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
+      -v "${HOME}/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro" \
       --name chrome \
       --net host \
       --privileged \
       chrisdaish/google-chrome
   else
     docker run -d \
-      -e DISPLAY=unix$DISPLAY \
+      -e "DISPLAY=unix${DISPLAY}" \
       -e ARGS="'--proxy-pac-url=$http_proxy_pac'" \
-      -e uid=$(id -u) \
-      -e gid=$(id -g) \
+      -e uid="$(id -u)" \
+      -e gid="$(id -g)" \
       -v /etc/localtime:/etc/localtime:ro \
-      -v $HOME/Downloads:/home/google-chrome/Downloads:rw \
-      -v $HOME/.chrome:/home/google-chrome/.config/google-chrome:rw \
+      -v "${HOME}/Downloads:/home/google-chrome/Downloads:rw" \
+      -v "${HOME}/.chrome:/home/google-chrome/.config/google-chrome:rw" \
       -v /tmp/.X11-unix:/tmp/.X11-unix \
       -v /dev/snd:/dev/snd \
       -v /dev/shm:/dev/shm \
-      -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
+      -v "${HOME}/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro" \
       --name chrome \
       --net host \
       --privileged \
@@ -96,9 +103,9 @@ dominion(){
   del_stopped dominion
 
   docker run -d \
-    -e DISPLAY=unix$DISPLAY \
-    -e uid=$(id -u) \
-    -e gid=$(id -g) \
+    -e "DISPLAY=unix${DISPLAY}" \
+    -e uid="$(id -u)" \
+    -e gid="$(id -g)" \
     -v /etc/localtime:/etc/localtime:ro \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --name dominion \
@@ -108,30 +115,30 @@ dominion(){
 firefox(){
   del_stopped firefox
 
-  if [[ `uname` = 'Darwin' ]]; then
+  if [[ $(uname) = 'Darwin' ]]; then
     docker run -d \
       -e DISPLAY=192.168.99.1:0 \
-      -e uid=$(id -u) \
-      -e gid=$(id -g) \
-      -v $HOME/Downloads:/home/firefox/Downloads:rw \
-      -v $HOME/.firefox:/home/firefox/.mozilla:rw \
+      -e uid="$(id -u)" \
+      -e gid="$(id -g)" \
+      -v "${HOME}/Downloads:/home/firefox/Downloads:rw" \
+      -v "${HOME}/.firefox:/home/firefox/.mozilla:rw" \
+      -v "${HOME}/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro" \
       -v /dev/snd:/dev/snd \
-      -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
       --name firefox \
       --net host \
       --privileged \
       chrisdaish/firefox
   else
     docker run -d \
-      -e DISPLAY=unix$DISPLAY \
-      -e uid=$(id -u) \
-      -e gid=$(id -g) \
-      -v $HOME/Downloads:/home/firefox/Downloads:rw \
-      -v $HOME/.firefox:/home/firefox/.mozilla:rw \
+      -e "DISPLAY=unix${DISPLAY}" \
+      -e uid="$(id -u)" \
+      -e gid="$(id -g)" \
+      -v "${HOME}/Downloads:/home/firefox/Downloads:rw" \
+      -v "${HOME}/.firefox:/home/firefox/.mozilla:rw" \
+      -v "${HOME}/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro" \
       -v /tmp/.X11-unix:/tmp/.X11-unix \
       -v /var/run/cups:/var/run/cups:ro \
       -v /dev/snd:/dev/snd \
-      -v $HOME/.docker-environment/alsa/asound.conf:/etc/asound.conf:ro \
       --name firefox \
       --net host \
       --privileged \
@@ -145,13 +152,13 @@ libreoffice(){
   del_stopped libreoffice
 
   docker run -d \
-    -e DISPLAY=unix$DISPLAY \
-    -e uid=$(id -u) \
-    -e gid=$(id -g) \
+    -e "DISPLAY=unix${DISPLAY}" \
+    -e uid="$(id -u)" \
+    -e gid="$(id -g)" \
     -v /etc/localtime:/etc/localtime:ro \
-    -v $HOME/Downloads:/home/libreoffice/Downloads:rw \
-    -v $HOME/Documents:/home/libreoffice/Documents:rw \
-    -v $HOME/.libreoffice:/home/libreoffice/.config/libreoffice:rw \
+    -v "${HOME}/Downloads:/home/libreoffice/Downloads:rw" \
+    -v "${HOME}/Documents:/home/libreoffice/Documents:rw" \
+    -v "${HOME}/.libreoffice:/home/libreoffice/.config/libreoffice:rw" \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /var/run/cups:/var/run/cups:ro \
     --name libreoffice \
@@ -162,13 +169,13 @@ vlc(){
   del_stopped vlc
 
   docker run -d \
-    -e DISPLAY=unix$DISPLAY \
-    -e uid=$(id -u) \
-    -e gid=$(id -g) \
+    -e "DISPLAY=unix${DISPLAY}" \
+    -e uid="$(id -u)" \
+    -e gid="$(id -g)" \
     -v /etc/localtime:/etc/localtime:ro \
-    -v "$HOME"/Downloads:/home/vlc/Downloads:rw \
-    -v "$HOME"/Documents:/home/vlc/Documents:rw \
-    -v "$HOME"/.vlc:/home/vlc/.config/vlc:rw \
+    -v "${HOME}"/Downloads:/home/vlc/Downloads:rw \
+    -v "${HOME}"/Documents:/home/vlc/Documents:rw \
+    -v "${HOME}"/.vlc:/home/vlc/.config/vlc:rw \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /var/run/cups:/var/run/cups:ro \
     -v /dev/snd:/dev/snd \
@@ -182,18 +189,18 @@ weather(){
   del_stopped weather
 
   docker run \
-    -e http_proxy=$http_proxy \
+    -e "http_proxy=${http_proxy}" \
     --name weather \
     --net host \
     jess/weather --units 'uk' --location 'PO15 7PA'
 }
 
 weeslack(){
-	del_stopped weeslack
+  del_stopped weeslack
 
-	docker run --rm -it \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v "${HOME}/.weechat:/home/user/.weechat" \
-		--name weeslack \
-		jess/wee-slack
+  docker run --rm -it \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v "${HOME}/.weechat:/home/user/.weechat" \
+    --name weeslack \
+    jess/wee-slack
 }
