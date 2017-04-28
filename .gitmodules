@@ -31,3 +31,6 @@
 [submodule "vim/bundle/ansible-vim"]
 	path = vim/bundle/ansible-vim
 	url = https://github.com/pearofducks/ansible-vim.git
+[submodule "vim/bundle/fugitive-gitlab.vim"]
+	path = vim/bundle/fugitive-gitlab.vim
+	url = https://github.com/shumphrey/fugitive-gitlab.vim.git
