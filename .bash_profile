@@ -4,7 +4,7 @@ if [[ `uname` = 'Darwin' ]]; then
   # brew stuffs
   export PATH="/usr/local/bin:$PATH"
   export PATH="/usr/local/sbin:$PATH"
-  source "`brew --prefix grc`/etc/grc.bashrc"
+  source '/usr/local/etc/grc.bashrc'
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
