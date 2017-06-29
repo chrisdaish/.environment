@@ -31,3 +31,6 @@
 [submodule "vim/bundle/fugitive-gitlab.vim"]
 	path = vim/bundle/fugitive-gitlab.vim
 	url = https://github.com/shumphrey/fugitive-gitlab.vim.git
+[submodule "vim/bundle/vim-puppet"]
+	path = vim/bundle/vim-puppet
+	url = https://github.com/voxpupuli/vim-puppet.git
