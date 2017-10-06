@@ -79,3 +79,6 @@ if [[ -f $HOME/.bash_prompt ]]; then
   fi
   source $HOME/.bash_prompt
 fi
+
+# RBEnv for localised Ruby environments
+eval "$(rbenv init -)"

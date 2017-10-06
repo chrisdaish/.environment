@@ -63,6 +63,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_puppet_puppetlint_args='--no-documentation-check --no-80chars-check --no-class_inherits_from_params_class-check'
+"let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_sh_shellcheck_args = '-x'
 
 " -----{ Airline }-----
